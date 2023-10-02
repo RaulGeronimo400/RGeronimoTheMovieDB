@@ -1,0 +1,33 @@
+﻿@model ML.Movie
+@{
+    ViewBag.Title = "GetPopular";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row justify-content-center">
+    <h2>Peliculas Populares</h2>
+    <p>Actualmente en la lista de películas populares se encuentran @Model.Peliculas.Count películas.</p>
+    <hr />
+
+    @foreach (ML.Movie movie in Model.Peliculas)
+    {
+        <div class="card" style="max-width: 610px; margin: 10px;">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <img style="margin-top: 15px;" src="@movie.Portada" class="card-img" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">@movie.Titulo</h5>
+                        <p class="card-text text-justify">@movie.Sinopsis</p>
+                        <a class="btn btn-outline-danger" href="@Url.Action("AddFavorite", "Movie", new { media_id = movie.IdPelicula })"
+                           onclick="return confirm('¿Estas seguro de agregar como favorito la película: @movie.Titulo?');">
+                            <i class="fa-solid fa-heart"></i>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
